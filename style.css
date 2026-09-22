@@ -27,22 +27,25 @@ body {
     position: fixed;
     top: 20px;
     right: 20px;
-    background: rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.7);
-    padding: 10px 15px;
-    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    padding: 12px 20px;
+    border-radius: 30px;
     cursor: pointer;
     z-index: 100;
-    color: #006da3;
-    font-weight: 500;
+    color: #0284c7;
+    font-weight: 600;
+    font-size: 1rem;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 15px rgba(2, 132, 199, 0.2);
 }
 
 .music-btn:hover {
-    background: rgba(255, 255, 255, 0.8);
-    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.9);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(2, 132, 199, 0.4);
 }
 
 .screen {
@@ -83,7 +86,7 @@ body {
 }
 
 .glass-panel h1 {
-    color: #016da3;
+    color: #0284c7;
     margin-bottom: 1rem;
     font-size: 2.5rem;
 }
@@ -166,14 +169,35 @@ body {
     color: #0c4a6e;
 }
 
+.cards-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cards-instruction {
+    font-size: 1.1rem;
+    color: #0284c7;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.7; }
+    50% { opacity: 1; }
+    100% { opacity: 0.7; }
+}
+
 .cards-section {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    width: 100%;
 }
 
 .card {
-    height: 150px;
+    height: 200px;
     perspective: 1000px;
     cursor: pointer;
 }
@@ -205,20 +229,48 @@ body {
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.8);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.card:hover .card-front, .card:hover .card-back {
+    box-shadow: 0 8px 25px rgba(2, 132, 199, 0.15);
+    border: 1px solid rgba(255, 255, 255, 1);
 }
 
 .card-front {
     color: #0284c7;
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: 1.3rem;
 }
 
 .card-back {
     transform: rotateY(180deg);
-    background: rgba(224, 242, 254, 0.8);
+    background: linear-gradient(135deg, rgba(224, 242, 254, 0.9) 0%, rgba(186, 230, 253, 0.9) 100%);
     color: #0369a1;
     font-size: 1rem;
     line-height: 1.5;
+    flex-direction: column;
+}
+
+.message-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.5s ease 0.4s; /* Fade in after flip */
+}
+
+.card.flipped .message-content {
+    opacity: 1;
+}
+
+.tap-again {
+    font-size: 0.8rem;
+    color: #0284c7;
+    margin-top: auto;
+    padding-top: 10px;
+    opacity: 0.8;
 }
 
 .interaction-section {

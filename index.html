@@ -10,9 +10,9 @@
 <body>
     <div id="particles-container"></div>
     
-    <button id="music-toggle" class="music-btn">🎵 Music Off</button>
-    <audio id="bg-music" loop>
-        <source src="https://cdn.pixabay.com/download/audio/2022/02/10/audio_d0a13f69d2.mp3" type="audio/mpeg">
+    <button id="musicToggle" class="music-btn">🔇 Music Off</button>
+    <audio id="backgroundMusic" loop preload="auto">
+        <source src="assets/music/still-you.mp4" type="video/mp4">
     </audio>
     <audio id="click-sound">
         <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8b81628d0.mp3" type="audio/mpeg">
@@ -47,29 +47,44 @@
             </div>
 
             <!-- Compliment Cards -->
-            <div class="cards-section">
-                <div class="card" onclick="flipCard(this)">
-                    <div class="card-inner">
-                        <div class="card-front">💙 A little reminder</div>
-                        <div class="card-back">You're more special than you probably realize.</div>
+            <div class="cards-wrapper">
+                <p class="cards-instruction">Tap a card to reveal a little message 💙</p>
+                <div class="cards-section">
+                    <div class="card" onclick="flipCard(this, 'reminder')">
+                        <div class="card-inner">
+                            <div class="card-front">💙 A little reminder</div>
+                            <div class="card-back">
+                                <div class="message-content"></div>
+                                <div class="tap-again">Tap again for another little message ✨</div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="card" onclick="flipCard(this)">
-                    <div class="card-inner">
-                        <div class="card-front">🌙 For today</div>
-                        <div class="card-back">Take things slowly. You don't have to have everything figured out.</div>
+                    <div class="card" onclick="flipCard(this, 'today')">
+                        <div class="card-inner">
+                            <div class="card-front">🌙 For today</div>
+                            <div class="card-back">
+                                <div class="message-content"></div>
+                                <div class="tap-again">Tap again for another little message ✨</div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="card" onclick="flipCard(this)">
-                    <div class="card-inner">
-                        <div class="card-front">✨ One more thing</div>
-                        <div class="card-back">Your smile looks good on you. So please don't forget to smile sometimes.</div>
+                    <div class="card" onclick="flipCard(this, 'oneMoreThing')">
+                        <div class="card-inner">
+                            <div class="card-front">✨ One more thing</div>
+                            <div class="card-back">
+                                <div class="message-content"></div>
+                                <div class="tap-again">Tap again for another little message ✨</div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="card" onclick="flipCard(this)">
-                    <div class="card-inner">
-                        <div class="card-front">🫶 And finally...</div>
-                        <div class="card-back">Someone out there genuinely wishes you a peaceful and happy day Dapat happy raka always kay isa pud na sa naka pa gwapa nimo.</div>
+                    <div class="card" onclick="flipCard(this, 'finally')">
+                        <div class="card-inner">
+                            <div class="card-front">🫶 And finally...</div>
+                            <div class="card-back">
+                                <div class="message-content"></div>
+                                <div class="tap-again">Tap again for another little message ✨</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -82,7 +97,7 @@
 
             <!-- Final Section -->
             <div class="final-section">
-                <p>That's all. I hope this special web makes you happy</p>
+                <p>That's all. No pressure. No expectations.</p>
                 <p>I just wanted to leave a little happiness here for you.</p>
                 <p class="highlight">Take care of yourself, Dassy. 💙</p>
                 <div class="pulsing-heart">💙</div>

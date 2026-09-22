@@ -1,19 +1,35 @@
 document.addEventListener('DOMContentLoaded', () => {
     // --- Music Toggle ---
-    const musicBtn = document.getElementById('music-toggle');
-    const bgMusic = document.getElementById('bg-music');
-    let isMusicPlaying = false;
+    const music = document.getElementById("backgroundMusic");
+    const musicToggle = document.getElementById("musicToggle");
 
-    musicBtn.addEventListener('click', () => {
+    let isMusicPlaying = false;
+    music.volume = 0.3;
+
+    musicToggle.addEventListener("click", async () => {
         if (isMusicPlaying) {
-            bgMusic.pause();
-            musicBtn.innerHTML = '🎵 Music Off';
+            music.pause();
+            isMusicPlaying = false;
+            musicToggle.textContent = "🔇 Music Off";
         } else {
-            bgMusic.volume = 0.3;
-            bgMusic.play().catch(e => console.log('Audio play failed:', e));
-            musicBtn.innerHTML = '🎵 Music On';
+            try {
+                await music.play();
+                isMusicPlaying = true;
+                musicToggle.textContent = "🎵 Music On";
+            } catch (error) {
+                console.log("Music playback requires user interaction.");
+            }
         }
-        isMusicPlaying = !isMusicPlaying;
+    });
+
+    music.addEventListener("play", () => {
+        musicToggle.textContent = "🎵 Music On";
+        isMusicPlaying = true;
+    });
+
+    music.addEventListener("pause", () => {
+        musicToggle.textContent = "🔇 Music Off";
+        isMusicPlaying = false;
     });
 
     // --- Screen Transition ---
@@ -156,7 +172,85 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Flip card function (global so inline onclick works)
-window.flipCard = function(element) {
-    element.classList.toggle('flipped');
+// --- Flip Card Logic ---
+const messagePools = {
+    reminder: [
+        "You're more special than you probably realize. 💙",
+        "Don't forget that you deserve good things too.",
+        "You may not notice it, but you bring something special into the lives of people around you.",
+        "You're doing better than you think.",
+        "You are worthy of kindness, patience, and respect.",
+        "Someone out there is genuinely hoping you're okay today.",
+        "Your presence matters more than you know.",
+        "You don't have to be perfect to be appreciated.",
+        "Even on difficult days, you are still someone worth caring about.",
+        "Never underestimate the little things that make you uniquely you. ✨"
+    ],
+    today: [
+        "Take things slowly today. You don't have to figure everything out at once.",
+        "It's okay to rest when you're tired.",
+        "I hope today gives you at least one reason to smile.",
+        "Don't be too hard on yourself today.",
+        "Drink some water, breathe, and take things one step at a time. 💙",
+        "Whatever you're carrying today, I hope it becomes a little lighter.",
+        "You deserve a peaceful day.",
+        "Give yourself permission to pause.",
+        "I hope something unexpectedly good happens to you today. ✨",
+        "One difficult day doesn't define your whole story."
+    ],
+    oneMoreThing: [
+        "Your smile looks good on you, so don't forget to use it sometimes. 😊",
+        "You have a beautiful way of being yourself.",
+        "There are little things about you that make you memorable.",
+        "Keep being genuine. That's something worth protecting.",
+        "You don't have to change who you are to be appreciated.",
+        "I hope you know how valuable you are.",
+        "Your kindness, even when it's small, can mean a lot.",
+        "There's something special about people who remain gentle despite difficult days.",
+        "You deserve people who make you feel comfortable being yourself.",
+        "Just a tiny reminder: you're worth appreciating. 💙"
+    ],
+    finally: [
+        "Someone out there genuinely wishes you a peaceful and happy day.",
+        "I hope you're taking care of yourself today.",
+        "Whatever happens today, don't forget to be kind to yourself.",
+        "I hope you find something that makes your heart feel lighter.",
+        "You deserve happiness without having to earn it.",
+        "I hope the next few days bring you more reasons to smile.",
+        "Please remember to rest when you need to.",
+        "I hope life gives you something beautiful when you least expect it. 🌷",
+        "No pressure, no expectations—just a little happiness sent your way.",
+        "Take care always, Dassy. You deserve peaceful days. 💙"
+    ]
+};
+
+const previousMessages = {
+    reminder: null,
+    today: null,
+    oneMoreThing: null,
+    finally: null
+};
+
+window.flipCard = function(element, category) {
+    const isFlipped = element.classList.contains('flipped');
+    
+    if (!isFlipped) {
+        // Flipping to the back, get a new message
+        const pool = messagePools[category];
+        let newMsg = pool[Math.floor(Math.random() * pool.length)];
+        
+        // Ensure not identical to previous
+        while (newMsg === previousMessages[category]) {
+            newMsg = pool[Math.floor(Math.random() * pool.length)];
+        }
+        
+        previousMessages[category] = newMsg;
+        
+        // Update content
+        element.querySelector('.message-content').innerText = newMsg;
+        element.classList.add('flipped');
+    } else {
+        // Flipping back to the front
+        element.classList.remove('flipped');
+    }
 };
