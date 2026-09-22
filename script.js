@@ -170,6 +170,51 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 1000);
         }
     }
+
+    // --- Message Form Logic ---
+    const messageForm = document.getElementById('messageForm');
+    const formStatus = document.getElementById('form-status');
+    const submitBtn = document.getElementById('submit-btn');
+
+    if (messageForm) {
+        messageForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const actionUrl = messageForm.getAttribute('action');
+            if (actionUrl === 'YOUR_FORMSPREE_ENDPOINT' || !actionUrl) {
+                formStatus.innerHTML = "Error: Formspree endpoint is missing.<br><br>Please replace 'YOUR_FORMSPREE_ENDPOINT' in index.html with your actual Formspree URL.";
+                return;
+            }
+
+            formStatus.innerHTML = "Sending your message... 💙";
+            submitBtn.disabled = true;
+            submitBtn.style.opacity = 0.7;
+
+            const formData = new FormData(messageForm);
+
+            try {
+                const response = await fetch(actionUrl, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    formStatus.innerHTML = "Message sent successfully. 💙<br><br>Thank you for sharing what's on your mind.";
+                    messageForm.reset();
+                } else {
+                    formStatus.innerHTML = "Something went wrong while sending the message. Please try again. 💙";
+                }
+            } catch (error) {
+                formStatus.innerHTML = "Something went wrong while sending the message. Please try again. 💙";
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.style.opacity = 1;
+            }
+        });
+    }
 });
 
 // --- Flip Card Logic ---
