@@ -1,0 +1,299 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 50%, #e0f2fe 100%);
+    background-attachment: fixed;
+    color: #334155;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+#particles-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.music-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    padding: 10px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    z-index: 100;
+    color: #006da3;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.music-btn:hover {
+    background: rgba(255, 255, 255, 0.8);
+    transform: translateY(-2px);
+}
+
+.screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 1s ease-in-out, visibility 1s;
+    z-index: 10;
+}
+
+.screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.screen.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.glass-panel {
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    padding: 3rem;
+    border-radius: 30px;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(186, 230, 253, 0.4);
+    max-width: 90%;
+    width: 500px;
+}
+
+.glass-panel h1 {
+    color: #016da3;
+    margin-bottom: 1rem;
+    font-size: 2.5rem;
+}
+
+.glass-panel p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.fade-in-text {
+    opacity: 0;
+    animation: fadeIn 1.5s forwards;
+}
+
+.delay-1 { animation-delay: 1s; }
+.delay-2 { animation-delay: 2s; }
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+.glow-btn {
+    background: linear-gradient(135deg, #7dd3fc 0%, #38bdf8 100%);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4);
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.glow-btn:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 6px 20px rgba(56, 189, 248, 0.6);
+}
+
+.glow-btn.large {
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    margin: 2rem 0;
+}
+
+.content-container {
+    max-width: 800px;
+    width: 90%;
+    margin: 4rem auto;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+
+.message-section {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(15px);
+    border-radius: 30px;
+    padding: 3rem 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.illustration {
+    margin-bottom: 2rem;
+    animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.typewriter-container {
+    min-height: 120px;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #0c4a6e;
+}
+
+.cards-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.card {
+    height: 150px;
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+.card-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-style: preserve-3d;
+}
+
+.card.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    text-align: center;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.card-front {
+    color: #0284c7;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.card-back {
+    transform: rotateY(180deg);
+    background: rgba(224, 242, 254, 0.8);
+    color: #0369a1;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.interaction-section {
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.random-message {
+    min-height: 50px;
+    font-size: 1.2rem;
+    color: #0284c7;
+    margin-top: 1rem;
+    font-weight: 500;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.final-section {
+    text-align: center;
+    margin-bottom: 4rem;
+    line-height: 2;
+    color: #475569;
+}
+
+.final-section .highlight {
+    color: #0284c7;
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin-top: 1rem;
+}
+
+.pulsing-heart {
+    font-size: 2rem;
+    margin-top: 1rem;
+    display: inline-block;
+    animation: heartbeat 1.5s infinite;
+}
+
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    15% { transform: scale(1.2); }
+    30% { transform: scale(1); }
+    45% { transform: scale(1.2); }
+    60% { transform: scale(1); }
+    100% { transform: scale(1); }
+}
+
+/* Particle animations */
+.particle {
+    position: absolute;
+    pointer-events: none;
+    animation: rise infinite linear;
+}
+
+@keyframes rise {
+    0% { transform: translateY(100vh) scale(0); opacity: 0; }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.8; }
+    100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+}
+
+.burst-particle {
+    position: absolute;
+    pointer-events: none;
+    animation: burst 1s ease-out forwards;
+}
+
+@keyframes burst {
+    0% { transform: translate(0, 0) scale(1); opacity: 1; }
+    100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+}
+
+@media (max-width: 600px) {
+    .glass-panel { padding: 2rem; }
+    .glass-panel h1 { font-size: 2rem; }
+    .glow-btn.large { font-size: 1rem; padding: 12px 25px; }
+    .content-container { gap: 3rem; margin: 2rem auto; }
+}
